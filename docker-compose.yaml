@@ -1,0 +1,42 @@
+version: "3.5"
+
+services:
+  go-grpc-boilerplate:
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    container_name: go-grpc-boilerplate
+    restart: unless-stopped
+    ports:
+      - ${GRPC_PORT}:${GRPC_PORT}
+      - ${HTTP_PORT}:${HTTP_PORT}
+    volumes:
+      - .:/app
+    depends_on:
+      - grpc-cockroachdb
+    tty: true
+    stdin_open: true
+    networks:
+      - go-echo-boilerplate
+
+  grpc-cockroachdb:
+    image: cockroachdb/cockroach:latest
+    container_name: grpc-cockroachdb
+    command: start --insecure
+    restart: unless-stopped
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+      - 8080:8080
+    volumes:
+      - grpc-cockroachdb-data:/cockroach/cockroach-data
+    tty: true
+    networks:
+      - go-echo-boilerplate
+
+volumes:
+  grpc-cockroachdb-data:
+
+networks:
+  go-echo-boilerplate:
+    name: go-grpc-boilerplate
+    driver: bridge

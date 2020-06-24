@@ -1,0 +1,20 @@
+steps:
+    - name: 'gcr.io/kaniko-project/executor'
+      args:
+          - --dockerfile=$_DOCKERFILE
+          - --destination=gcr.io/$PROJECT_ID/go-grpc-boilerplate:$BRANCH_NAME
+          - --destination=gcr.io/$PROJECT_ID/go-grpc-boilerplate:$SHORT_SHA
+          - --destination=gcr.io/$PROJECT_ID/go-grpc-boilerplate:latest
+          - --cache=true
+
+    - name: 'gcr.io/cloud-builders/kubectl'
+      args:
+          - set
+          - image
+          - deployment/go-grpc-boilerplate-$_ENV
+          - go-grpc-boilerplate-$_ENV=gcr.io/$PROJECT_ID/go-grpc-boilerplate:$SHORT_SHA
+          - --namespace
+          - $_NAMESPACE
+      env:
+          - 'CLOUDSDK_COMPUTE_REGION=us-west2'
+          - 'CLOUDSDK_CONTAINER_CLUSTER=k8s-cluster'

@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package grpc.boilerplate;
+
+option go_package = ".;pb";
+
+import "google/api/annotations.proto";
+
+message User {
+	uint64 id = 1;
+	string first_name = 2;
+	string last_name = 3;
+	string email = 4;
+}
+
+message GetUserRequest {
+	uint64 id = 1;
+}
+
+message GetUserResponse {
+	User user = 1;
+}
+
+service UserService {
+	rpc GetUser (GetUserRequest) returns (GetUserResponse) {
+		option (google.api.http) = {
+			get: "/v1/users/{id}"
+		};
+	};
+};
