@@ -51,7 +51,7 @@ func (interceptor *AuthInterceptor) Unary() grpc.UnaryServerInterceptor {
 		// @TODO: use token to check auth instead of log to stdout
 		log.WithField("token", token).Info("TOKEN")
 
-		cnn, err := interceptor.connector.Connect("PAVE-ID")
+		cnn, err := interceptor.connector.Connect("ANOTHER-GRPC")
 		defer cnn.Close()
 		// @TODO: Call gRPC to PAVE-ID to check auth
 
@@ -80,7 +80,7 @@ func (interceptor *AuthInterceptor) Stream() grpc.StreamServerInterceptor {
 		// @TODO: use token to check auth instead of log to stdout
 		log.WithField("token", token).Info("TOKEN")
 
-		cnn, err := interceptor.connector.Connect("PAVE-ID")
+		cnn, err := interceptor.connector.Connect("ANOTHER-GRPC")
 		defer cnn.Close()
 		// @TODO: Call gRPC to PAVE-ID to check auth
 

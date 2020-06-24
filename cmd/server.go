@@ -226,12 +226,12 @@ func createConnector() connect.Connector {
 		ClientCert: viper.GetString("CLIENT_CERT"),
 	}
 
-	paveStorage := connect.Connection{
+	anotherGRPC := connect.Connection{
 		Name:       "ANOTHER-GRPC",
 		Address:    viper.GetString("ANOTHER_GRPC"),
 		TLS:        viper.GetBool("TLS_ENABLE"),
 		TLSOptions: &tlsOpts,
 	}
 
-	return connector.Add(&paveStorage)
+	return connector.Add(&anotherGRPC)
 }
