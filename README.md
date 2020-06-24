@@ -31,6 +31,8 @@ Edit some ENV to satisfy with your setting
 
 - After starting docker, you just need to init database name to make server work properly!
 ```bash
+    chmod +x hack/*.sh
+
     ./hack/crdb-insecure-init-db.sh
 ```
 
