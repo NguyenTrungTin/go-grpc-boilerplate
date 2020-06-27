@@ -15,6 +15,7 @@ import (
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
 // Init is used to init the connection to the database
@@ -34,6 +35,12 @@ func Connect() *gorm.DB {
 		log.WithError(err).Fatal("Failed to connect to the database")
 	}
 	log.Info("Connected to database successfully")
+
+	if viper.GetBool("DB_LOGMODE") {
+		db.Config.Logger = db.Config.Logger.LogMode(logger.Info)
+	} else {
+		db.Config.Logger = db.Config.Logger.LogMode(logger.Silent)
+	}
 
 	return db
 }

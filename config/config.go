@@ -75,6 +75,7 @@ func setDefaultConfig() {
 	viper.SetDefault("DB_CA", "/certs/crdb/ca.crt")
 	viper.SetDefault("DB_KEY", "/certs/crdb/client.dev.key")
 	viper.SetDefault("DB_CERT", "/certs/crdb/client.dev.crt")
+	viper.SetDefault("DB_LOGMODE", true)
 }
 
 // getJwtKeyFromFile get jwt public/private key from local files
