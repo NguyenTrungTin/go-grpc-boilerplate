@@ -23,7 +23,7 @@ func Connect() *gorm.DB {
 	sslmode := viper.GetBool("DB_SSLMODE")
 	var dsn string
 	if sslmode {
-		dsn = fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=require sslrootcert=certs/crdb/ca.crt sslkey=certs/crdb/client.pave.key sslcert=certs/crdb/client.pave.crt", viper.Get("DB_HOST"), viper.Get("DB_PORT"), viper.Get("DB_USER"), viper.Get("DB_NAME"), viper.Get("DB_PASSWORD"))
+		dsn = fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=require sslrootcert=%s sslkey=%s sslcert=%s", viper.Get("DB_HOST"), viper.Get("DB_PORT"), viper.Get("DB_USER"), viper.Get("DB_NAME"), viper.Get("DB_PASSWORD"), viper.Get("DB_CA"), viper.Get("DB_KEY"), viper.Get("DB_CERT"))
 	} else {
 		dsn = fmt.Sprintf("host=%s port=%s dbname=%s sslmode=disable", viper.Get("DB_HOST"), viper.Get("DB_PORT"), viper.Get("DB_NAME"))
 	}

@@ -34,5 +34,11 @@ test:
 grpc-cert:
 	chmod +x hack/generate-grpc-certs.sh && hack/generate-grpc-certs.sh
 
+migrate-up:
+	migrate -path db/migrations -database "cockroachdb://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=require&sslrootcert=${DB_CA}&sslkey=${DB_KEY}&sslcert=${DB_CERT}" -verbose up
+
+migrate-down:
+	migrate -path db/migrations -database "cockroachdb://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=require&sslrootcert=${DB_CA}&sslkey=${DB_KEY}&sslcert=${DB_CERT}" -verbose down
+
 .PHONY: gen clean server client test cert
 

@@ -33,5 +33,5 @@ require (
 	google.golang.org/protobuf v1.24.0
 	gopkg.in/ini.v1 v1.57.0 // indirect
 	gorm.io/driver/postgres v0.2.0
-	gorm.io/gorm v0.2.7
+	gorm.io/gorm v0.2.17
 )
