@@ -12,7 +12,7 @@ import (
 
 	"github.com/nguyentrungtin/go-grpc-boilerplate/model"
 
-	"github.com/dgrijalva/jwt-go"
+	"github.com/golang-jwt/jwt/v4"
 )
 
 // JWTManager is a JSON web token manager
